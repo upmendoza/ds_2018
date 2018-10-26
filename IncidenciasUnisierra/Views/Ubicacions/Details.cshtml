@@ -1,0 +1,42 @@
+﻿@model IncidenciasUnisierra.Models.Ubicacion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ubicacion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Edificio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Edificio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Planta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Planta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Area)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index", new object { }, new { @class = "actionFont" })
+</p>

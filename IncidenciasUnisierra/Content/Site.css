@@ -1,0 +1,110 @@
+﻿body {
+    padding-top: 0px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+
+
+
+
+
+* {
+    margin: 0;
+}
+
+header {
+    /*height: 170px;
+    color: #000;
+    font-size: 20px;
+    font-family: Sans-serif;
+    background: #009688;
+    padding-top: 30px;
+    padding-left: 0px;*/
+}
+
+.contenedor {
+    /*width: 350px;
+    height: 300px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;*/
+}
+
+.botonF1 {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    background: #F44336;
+    left: 0px;
+    top: 76%;
+    position: absolute;
+    margin-left: 67%;
+    margin-top: 5px;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 36px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transition: .10s;
+}
+
+span {
+    transition: .5s;
+}
+
+.botonF1:hover span {
+    transform: rotate(360deg);
+}
+
+.botonF1:active {
+    transform: scale(1.1);
+}
+
+.button {
+    width: 500px;
+    height: 300px;
+    border-radius: 3%;
+    border: none;
+    color: #000;
+    /*box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);*/
+    /*font-size: 28px;*/
+    outline: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-right: 12px;
+    transform: scale(0);
+}
+
+.botonF2 {
+    /*background: #000;*/
+    margin-bottom: 85px;
+    transition: 0.10s;
+}
+
+
+.animacionVer {
+    transform: scale(1);
+}
+

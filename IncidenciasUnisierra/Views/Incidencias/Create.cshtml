@@ -1,0 +1,264 @@
+﻿@model IncidenciasUnisierra.Models.Incidencia
+
+
+<form action="/Incidencias/Create" method="post" enctype="multipart/form-data">
+    <input name="__RequestVerificationToken" type="hidden" value="zW3m8Cty-Q2scIQyP3gSQDyd8TEGfEI6v-Tu0vHyGPDwZqSfKZh5Pq-6asik_YFYa87-CrfAbeIIwwtUDkUrQ3I5dUGRGx07n-6eHsK7B_w1" />
+    <div class="form-horizontal">
+    </div>
+
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group" style="margin-top:4%">
+                        @*<label  for="Nombre" >Nombre</label>*@
+                        <input class="form-control text-box single-line" id="Nombre" name="Nombre" type="text" value="" placeholder="Nombre de Incidencia" />
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Nombre" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <div class="form-group">
+                        @*<label  for="Descripcion">Descripcion</label>*@
+                        <input class="form-control text-box single-line" id="Descripcion" name="Descripcion" type="text" value="" placeholder="Descripción" />
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Descripcion" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Nombre">Ubicación</label>
+
+                        <div style="margin-left:10%; width:75%">
+                            <select class="form-control" id="edificio" name="edificio">
+                                <option value="">Edificio</option>
+                                <option value="1">Telemática</option>
+                                <option value="2">Industrial</option>
+                                <option value="3">Principal</option>
+                                <option value="4">Biología</option>
+                                <option value="5">Cafetería</option>
+                            </select>
+                            <select class="form-control" id="planta" name="planta">
+                                <option value="">Planta</option>
+                                <option value="1">Alta</option>
+                                <option value="2">Baja</option>
+                            </select>
+
+
+
+                            @Html.DropDownList("areas", new SelectList(string.Empty, "Value", "Text"), "Seleccione Area", new { @class = "form-control", id = "area" })
+
+                            @*<select class="form-control" id="area" name="NombreArea">
+                        <option value="">Área</option>
+                        <option>Centro de Computo</option>
+                        <option>Laboratorio Electronica</option>
+                        <option>Laboratorio de Redes</option>
+                        <option>Explanada</option>
+                    </select>*@
+                        </div>
+
+                        <div class="form-group" style="margin-top:10%; text-align:right">
+                            <input id="Create" type="submit" value="Registrar" class="btn btn-default" />
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-4" style="text-align:center">
+                    <div class="form-group">
+                        <div id="imgP"><img src="~/Content/Images/Subir.png" /></div>
+                        <img id="imgSalida" width="75%" height="75%" src="" style="margin-bottom: 2%; margin-top: 2%;" />
+                        <input type="file" name="image" id="imgEvidencia" value="Añadir evidencia" />
+                        <button class="btn btn-default" id="btnEnviar" type="button">Añadir Evidencia</button>
+
+                    </div>
+                </div>
+
+
+                @*<div class="col-md-4" style="text-align:center">
+                    <div class="form-group">
+                        <div><img src="~/Content/Images/Subir.png" /></div>
+
+                        <input type="file" name="image" id="imgEvidencia" value="Añadir evidencia" />
+                        <button class="btn btn-default" id="btnEnviar" type="button">Añadir Evidencia</button>
+
+                    </div>
+                </div>*@
+            </div>
+            <div class="col-md-2">
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div>
+        @*@Html.ActionLink("Regresar", "Index", new object { }, new { @class = "actionFont" })*@
+    </div>
+</form>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+
+
+        $("#imgEvidencia").hide();
+        $("#imgSalida").hide();
+
+        $("#Create").click(function () {
+
+            //if ($("#Nombre").val().length < 3) {
+            //    //alert("Nombre: Debe contener como minimo 3 caracteres");
+            //    //return false;
+            //    //swal("Incidencia Registrada Correctamente!", "Desea registrar otra?", "success").then((value) => {
+
+            //    //    $("#area").val("");
+            //    //    $("#Descripcion").val("");
+            //    //    $("#planta").val("");
+
+            //    //});
+            //}
+
+            if ($("#Descripcion").val().length < 4) {
+                alert("Descripcion: Debe contener como minimo 4 caracteres");
+                return false;
+            }
+
+            if ($("#edificio").val() == "") {
+                alert("Seleccione un edificio");
+                return false;
+            }
+
+            if ($("#planta").val() == "") {
+                alert("Seleccione una planta");
+                return false;
+            }
+
+            if ($("#area").val() == "") {
+                alert("Seleccione una area");
+                return false;
+            }
+
+            if ($("#btnEnviar").empty("btnEnviar")) {
+
+                swal({
+                    title: "¡Incidencia Registrada!", icon: "success",  buttons: false,
+                });
+
+                //swal(" LISTO !", "Se Registro Satisfactoriamente tu Incidencia", "success");
+               
+
+                //swal({
+                //    title: "¡Incidencia Registrada!", icon: "success", text: "¿Desea registrar otra Incidencia?", buttons: ["SI", "NO"],
+                //});
+                return true;
+            }
+
+        });
+
+        $("#btnEnviar").click(function () {
+            $("#imgP").hide();
+            $("#imgEvidencia").click();
+            $("#imgSalida").show();
+        });
+
+
+
+        //Cargar dropdownlist de areas con ajax cuando cambie Edificio
+
+        $("#edificio").change(function () {
+            $("#area").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("AreasporEdificioyPlanta")', // we are calling json method
+
+                dataType: 'json',
+
+                data: { idedificio: $("#edificio").val(), idplanta: $("#planta").val()},
+               // here we are get value of selected country and passing same value
+
+
+                success: function (states) {
+                    // states contains the JSON formatted list
+                    // of states passed from the controller
+
+                    $.each(states, function (i, state) {
+                    $("#area").append('<option value="' + state.Value + '">' +
+                         state.Text + '</option>');
+                    // here we are adding option for States
+
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+
+
+              $("#planta").change(function () {
+            $("#area").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("AreasporEdificioyPlanta")', // we are calling json method
+
+                dataType: 'json',
+
+                data: { idedificio: $("#edificio").val(), idplanta: $("#planta").val()},
+               // here we are get value of selected country and passing same value
+
+
+                success: function (states) {
+
+                    $.each(states, function (i, state) {
+                    $("#area").append('<option value="' + state.Value + '">' +
+                         state.Text + '</option>');
+
+
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+
+    });
+
+    $(window).load(function () {
+
+        $(function () {
+            $('#imgEvidencia').change(function (e) {
+                addImage(e);
+            });
+
+            function addImage(e) {
+                var file = e.target.files[0],
+                    imageType = /image.*/;
+
+                if (!file.type.match(imageType))
+                    return;
+
+                var reader = new FileReader();
+                reader.onload = fileOnload;
+                reader.readAsDataURL(file);
+            }
+
+            function fileOnload(e) {
+                var result = e.target.result;
+                $('#imgSalida').attr("src", result);
+            }
+        });
+    });
+
+
+
+</script>

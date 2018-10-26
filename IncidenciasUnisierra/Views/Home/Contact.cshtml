@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+}
+
+<form action="~/Home/Contact" method="post">
+    <div class="col-md-12">
+        <h3> @ViewBag.Id</h3>
+        <center>
+            <div style=" margin-top: 5%;margin-bottom:5%; ">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Nombre" style="font-size:25px"> Incidencia </label>
+
+                        <div>
+                            @Html.DropDownList("Incidencia", ViewBag.Incidencias as IEnumerable<SelectListItem>, "Seleccione Incidencia", htmlAttributes: new { @class = "form-control", value = " HOLA" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Nombre" style="font-size:25px"> Responsable </label>
+                        <div>
+                            @Html.DropDownList( "Nombres", ViewBag.Nombres as IEnumerable<SelectListItem>, "Seleccione Responsable", htmlAttributes: new { @class = "form-control", value=" HOLA"})
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*@foreach (var item in ViewBag.Nombres)
+        {
+            @Html.DisplayFor(ViewBag.Nombres => item.Nombre)
+        }*@
+            <div>
+                <button id="Asignar" type="submit" style="margin-bottom:3%;width: 19%" class="btn btn-default">
+                    Asignar
+                </button>
+
+            </div>
+        </center>
+
+    </div>
+</form>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#Asignar").click(function () {
+
+            if ($("#Incidencia").val() == "") {
+                alert("Seleccione una Incidencia");
+                return false;
+            }
+
+            if ($("#Nombres").val() == "") {
+                alert("Seleccione un Trabajador");
+                return false;
+            }
+            //if ($("#Asignar").empty("Asignar")) {
+            //    alert("Su registro se Realizo Satisfactoriamente");
+            //    return true;
+            //}
+
+
+            if ($("#Asignar").empty("Asignar")) {
+                //swal(" LISTO !", "Se Registro Satisfactoriamente tu Incidencia", "success", {timer: 10000});
+
+                swal({
+                    title: "¡Se Ha Asignado La Tarea!", icon: "success", buttons: false,
+                });
+                return true;
+            }
+
+        })
+    });
+</script>

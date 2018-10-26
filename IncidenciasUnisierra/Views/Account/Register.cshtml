@@ -1,0 +1,140 @@
+﻿@model IncidenciasUnisierra.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Registrar Usuario";
+}
+
+<h2 style="text-align:center">@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="ConfirmPassword">Nombre</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="nombre" name="nombre" type="text" value="" />
+            <span class="field-validation-valid text-danger" data-valmsg-for="Descripcion" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="ConfirmPassword">Apellido</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="apellido" name="apellido" type="text" value="" />
+            <span class="field-validation-valid text-danger" data-valmsg-for="Descripcion" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-md-2 control-label" >Rol</label>
+        <div class="col-md-10">
+            @Html.DropDownList("Roles", ViewBag.Roles as IEnumerable<SelectListItem>, "Seleccione un Rol", htmlAttributes: new { @class = "form-control", value = " HOLA" })
+
+        </div>
+    </div>
+  
+        <label class="col-md-2 control-label" for="ConfirmPassword"></label>
+        <div class="col-md-10">
+            <div class="form-group">
+                <button id="Registro" type="submit" style="margin-bottom:3%;width: 19%" class="btn btn-default">
+                    Registrar
+                </button>
+            </div>
+    </div>
+
+
+
+    @*<div class="form-group">
+        <button id="Registro" type="submit" style="margin-bottom:3%;width: 19%" class="btn btn-default">
+            Registrar
+        </button>*@
+        @*<div class="col-md-offset-2 col-md-10">
+            <input  id="Registrar" type="submit" class="btn btn-default" value="Registrar" />
+        </div>*@
+    
+}
+
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#Registro").click(function () {
+
+                if ($("#Roles").val() == "") {
+                    alert("Seleccione un Rol");
+                    return false;
+                }
+
+            if ($("#Registro").empty("Registro")) {
+                //swal(" LISTO !", "Se Registro Satisfactoriamente tu Incidencia", "success", {timer: 10000});
+
+                swal({
+                    title: "¡Se Ha Registrado Su Usuario!", icon: "success", buttons: false,
+                });
+                return true;
+            }
+
+        })
+
+       
+
+        
+    });
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@*<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+
+    $(function () {
+
+        if ($("#Roles").val() == "") {
+            alert("Seleccione un Rol");
+            return false;
+        }
+
+        if ($("#Registrar").empty("Registrar")) {
+                //swal(" LISTO !", "Se Registro Satisfactoriamente tu Incidencia", "success", {timer: 10000});
+
+                swal({
+                    title: "¡Se Ha Registrado Su Usuario!", icon: "success", buttons: false,
+                });
+                return true;
+            }
+    });
+</script>*@

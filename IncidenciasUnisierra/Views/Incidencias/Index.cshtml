@@ -1,0 +1,92 @@
+﻿@model IEnumerable<IncidenciasUnisierra.Models.Incidencia>
+
+
+<div class="col-md-12">
+    <div class="col-md-1" style="text-align:center">
+       
+    </div>
+    <div class="col-md-1" style="text-align:center">
+        <h2>@Html.DisplayNameFor(model => model.Nombre)</h2>
+    </div>
+    <div class="col-md-3" style="text-align:center">
+        <h2>Descripción</h2>
+    </div>
+    <div class="col-md-2" style="text-align:center">
+        <h2>Asignado</h2>
+    </div>
+    <div class="col-md-1" style="text-align:center">
+        <h2>@Html.DisplayNameFor(model => model.Ubicacion.Edificio)</h2>
+    </div>
+    <div class="col-md-2" style="text-align:center">
+        <h2>@Html.DisplayNameFor(model => model.Fecha)</h2>
+    </div>
+    <div class="col-md-2" style="text-align:center">
+        <h2>@Html.DisplayNameFor(model => model.Estado)</h2>
+    </div>
+</div>
+
+
+@foreach (var item in Model)
+{
+
+    <div class="col-md-12 table-bordered" style="margin-top:10% ">
+
+        <div class="col-md-1  " style="text-align:center">
+            <img src="@Url.Action("Imagenes", "Incidencias", new { id = item.Id })" width="85" height="85" />
+        </div>
+        <div class="col-md-1 " style="text-align:center">
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </div>
+        <div class="col-md-3 " style="text-align:center">
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </div>
+        @*<div class="form-group">
+            <label for="descripcionFormControlTextarea1">Descripción</label>
+            <textarea class="form-control" id="descripcionFormControlTextarea1" rows="3" placeholder="Describa el motivo de apartar el lugar">
+                    </textarea>
+        </div>*@
+        <div class="col-md-2" style="text-align:center" >
+            @Html.DisplayFor(modelItem => item.Responsable.Nombre)
+        </div>
+        <div class="col-md-1 " style="text-align:center">
+            @Html.DisplayFor(modelItem => item.Ubicacion.Edificio)
+        </div>
+        <div class="col-md-2  " style="text-align:center">
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </div>
+        <div class="col-md-2 " style="text-align:center; margin-bottom: 4%">
+            @Html.DisplayFor(modelItem => item.Estado)
+
+            <form action="~/Incidencias/Index" method="post">
+
+                @if (item.Estado.Equals("No Atendido"))
+                {
+                    <button class="btn btn-danger" type="button" value="No Atendido" name="opcion">✖</button>
+
+                }
+
+                @if (item.Estado.Equals("En Proceso"))
+                {
+                    <button class="btn btn-warning" type="button" value="En Proceso" name="opcion">☢ </button>
+
+                }
+
+                @if (item.Estado.Equals("Atendido"))
+                {
+                    <button class="btn btn-success" type="button" value="Atendido" name="opcion">✔</button>
+
+                }
+
+                <input type="text" class="btn btn-success" style="display:none" value=" @Html.DisplayFor(modelItem => item.Id)" name="IdBotones" />
+
+            </form>
+
+            @*<div>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "actionFont" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "actionFont" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "actionFont" })|
+            </div>*@
+
+        </div>
+    </div>
+}

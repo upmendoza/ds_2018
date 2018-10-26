@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title Sistema de Registro de Incidencias</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+
+<body class="container" background="~/Content/Images/background.jpg" style=" background-position:  center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover">
+
+
+    @*Rejilla de titulo*@
+    <div class="col-md-12">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-1">
+            <img src="~/Content/Images/logous.png" width="163" height="163" />
+        </div>
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-4 text-white text-center">
+            <h1 style="font-size:42px">Sistema de Registro de Incidencias</h1>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+    @*-----------------------------------------------------------------------------------*@
+    <div class="col-md-12">
+        <br /><br /><br /><br /><br /><br />
+        <div class="row">
+
+            <nav class="navbar   navbar-fixed-bottom" role="navigation" style=" background-color: rgba(64,64,64,.85); position:inherit">
+                <!-- El logotipo y el icono que despliega el menú se agrupan
+                para mostrarlos mejor en los dispositivos móviles -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Desplegar navegación</span>
+                        <span class="icon-bar" style="background-color:white"></span>
+                        <span class="icon-bar" style="background-color:white"></span>
+                        <span class="icon-bar" style="background-color:white"></span>
+                    </button>
+
+                </div>
+                <!-- Agrupar los enlaces de navegación, los formularios y cualquier
+                otro elemento que se pueda ocultar al minimizar la barra -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+
+                        <li>@Html.ActionLink("Inicio", "Create", "Incidencias")</li>
+
+                        @if (User.IsInRole("JefeMantenimiento") || User.IsInRole("Supervisores"))
+                        {
+                            <li>@Html.ActionLink("Incidencias", "Index", "Incidencias")</li>
+                        }
+                        else
+                        {
+                            if (User.IsInRole("Manuales"))
+                            {
+                                <li>@Html.ActionLink("Incidencias", "Tareas", "Incidencias")</li>
+                            }
+
+                        }
+
+                        @if (User.IsInRole("JefeMantenimiento"))
+                        {
+                            <li>@Html.ActionLink("Asignación", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Registrar", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        }
+                    </ul>
+
+
+                    @using Microsoft.AspNet.Identity
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                </li>
+                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesión</a></li>
+                            </ul>
+                        }
+                    }
+                    else
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            @if (User.IsInRole("JefeMantenimiento"))
+                            {
+                                <li>@Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                            }
+
+                            <li>@Html.ActionLink("Iniciar Sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                        </ul>
+                    }
+
+                </div>
+
+            </nav>
+        </div>
+        <div class="row" >
+            <div class="container body-content" style="background-color: rgba(242,242,242,.85)">
+                @RenderBody()
+            </div>
+        </div>
+        <div class="row">
+
+            <footer style="background-color: rgba(255,102,0,.70)" class="navbar navbar-expand-lg "></footer>
+
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+
+
+</body>
+</html>

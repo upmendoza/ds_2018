@@ -1,0 +1,107 @@
+﻿@model IEnumerable<IncidenciasUnisierra.Models.Incidencia>
+
+@{
+    ViewBag.Title = "Tareas";
+}
+
+<div class="col-md-12">
+        <div class="col-md-2" style="text-align:center">
+          
+        </div>
+        <div class="col-md-2" style="text-align:center">
+            <h2>@Html.DisplayNameFor(model => model.Nombre)</h2>
+        </div>
+        <div class="col-md-3" style="text-align:center">
+            <h2>Descripción</h2>
+        </div>
+        <div class="col-md-1" style="text-align:center">
+            <h2>@Html.DisplayNameFor(model => model.Ubicacion.Edificio)</h2>
+        </div>
+        <div class="col-md-2" style="text-align:center">
+            <h2>@Html.DisplayNameFor(model => model.Fecha)</h2> 
+        </div>
+        <div class="col-md-2" style="text-align:center">
+            <h2>@Html.DisplayNameFor(model => model.Estado)</h2>    
+        </div>
+</div>
+
+
+    @foreach (var item in Model)
+    {
+
+        <div class="col-md-12 table-bordered" style="margin-top:10%; "  >
+          
+            <div class="col-md-2  " style="text-align:center" >
+                <img src="@Url.Action("Imagenes", "Incidencias", new { id = item.Id })" width="85" height="85" />
+            </div>
+            <div class="col-md-2 ">
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </div>
+            <div class="col-md-3 " >
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </div>
+            <div class="col-md-1 " style="text-align:center">
+                @Html.DisplayFor(modelItem => item.Ubicacion.Edificio)
+            </div>
+            <div class="col-md-2  " style="text-align:center">
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </div>
+            <div class="col-md-2 " style="text-align:center; margin-bottom: 4%">
+                @Html.DisplayFor(modelItem => item.Estado)
+
+                <form action="~/Incidencias/Tareas" method="post">
+
+                    <button class="btn btn-danger" type="submit" value="No Atendido" name="opcion">✖</button>
+                    <button class="btn btn-warning" type="submit" value="En Proceso" name="opcion">☢ </button>
+                    <button class="btn btn-success" type="submit" value="Atendido" name="opcion">✔</button>
+                    <input type="text" class="btn btn-success" style="display:none" value=" @Html.DisplayFor(modelItem => item.Id)" name="IdBotones" />
+                </form>
+            </div>
+        </div>
+    }
+
+
+
+
+
+
+
+
+
+    @*@foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    <img src="@Url.Action("Imagenes", "Incidencias", new { id = item.Id })" width="100" height="100" />
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ubicacion.Edificio)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+
+                    <form action="~/Incidencias/Index" method="post">
+
+                        <button class="btn btn-danger" type="submit" value="No Atendido" name="opcion">✖</button>
+                        <button class="btn btn-warning" type="submit" value="En Proceso" name="opcion">☢ </button>
+                        <button class="btn btn-success" type="submit" value="Atendido" name="opcion">✔</button>
+                        <input type="text" class="btn btn-success" style="display:none" value=" @Html.DisplayFor(modelItem => item.Id)" name="IdBotones" />
+                    </form>
+                </td>
+
+            </tr>
+        }*@
+
+
