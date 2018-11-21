@@ -298,6 +298,7 @@
     <Content Include="Views\Areas\Index.cshtml" />
     <Content Include="Views\Home\RegistroCompleto.cshtml" />
     <Content Include="Views\Incidencias\Tareas.cshtml" />
+    <Content Include="Views\Incidencias\TareasAtendidas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

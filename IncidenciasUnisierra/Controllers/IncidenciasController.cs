@@ -40,6 +40,17 @@ namespace IncidenciasUnisierra.Controllers
             return View(db.Incidencias.ToList());
         }
 
+        public ActionResult TareasAtendidas()
+        {
+            db.Incidencias.ToList();
+
+            var usuario = User.Identity.GetUserName();
+            var id = db.Responsables.Where(y => y.NombreUsuario.Equals(usuario)).Select(x => x.Id).FirstOrDefault();
+            var lista = db.Incidencias.Where(y => y.ResponsableId == id && y.Estado.Equals("Atendidas") || y.Estado.Equals("Proseco")).ToList();
+
+            return View(lista);
+        }
+
 
         [Authorize(Roles = "Manuales,Supervisores")]
         public ActionResult Tareas()
@@ -48,7 +59,7 @@ namespace IncidenciasUnisierra.Controllers
         
            var usuario = User.Identity.GetUserName();
            var id = db.Responsables.Where(y => y.NombreUsuario.Equals(usuario)).Select(x => x.Id).FirstOrDefault();
-           var lista = db.Incidencias.Where(y => y.ResponsableId == id).ToList();
+           var lista = db.Incidencias.Where(y => y.ResponsableId == id && y.Estado.Equals("No atendido")).ToList();
 
             return View(lista);
         }
